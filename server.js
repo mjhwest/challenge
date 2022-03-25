@@ -1,5 +1,7 @@
 const express = require ('express')
 const bodyParser = require('body-parser')
+const getDays = require('./methods')
+
 const app = express()
 const PORT = 5000 
 
