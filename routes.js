@@ -1,6 +1,26 @@
 //ROUTE 1: 
-// Find out the number of days between two datetime parameters.
 
+const { response } = require("express");
+module.exports = function (app) {
+
+    app.get('/daysbetween', (req, res) => {
+        const firstDate = new Date(2008, 1, 12);
+        const secondDate = new Date(2008, 1, 22);
+        const diffTime = Math.abs(secondDate - firstDate);
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    })
+
+
+
+}
+
+// Find out the number of days between two datetime parameters.
+// app.get('/daysbetween', (req, res) => {
+//     const firstDate = new Date(2008, 1, 12);
+//     const secondDate = new Date(2008, 1, 22);
+//     const diffTime = Math.abs(secondDate - firstDate);
+//     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+// })
 
 // ROUTE 2: 
 // Find out the number of weekdays between two datetime parameters.
@@ -15,3 +35,4 @@
 // ROUTE 5: 
 // Allow the specification of a timezone for comparison of input parameters from
 // different timezones.
+
