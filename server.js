@@ -33,22 +33,24 @@ app.get("/getweekdays", (req, res) => {
 
 //function to figure out the number of weekdays in any given date period.
 function getWeekDays(firstDate, secondDate) {
-  //start count at 0
   let count = 0;
-  //current date = new Date, new date is the first date using getTime (which is in miliseoncds)
+  //current date = new Date, new date is the first date using getTime (which is in miliseconds)
   const currentDate = new Date(firstDate.getTime());
   while (currentDate <= secondDate) {
     const dayOfWeek = currentDate.getDay();
-    //getDay has default value of 0 for Sunday, 6 for Saturday, if day is 0 or 6 output expected to be fulse, and not included to count
+    //getDay has default value of 0 for Sunday, 6 for Saturday, if day is 0 or 6 output expected to be false, and not included to count
     if (dayOfWeek !== 0 && dayOfWeek !== 6) count++;
-    //set date of current date and 1 for count for every extra day thats not value 0 or 6
+    //iterate the loop by 1 complete day 
     currentDate.setDate(currentDate.getDate() + 1);
   }
-  //return the count 
+  //return the number of days. 
   return count;
 }
 
 // 3. Find out the number of complete weeks between two datetime parameters.
+app.get("/completeweeks", (req, res) => {
+
+})
 
 
 app.listen(PORT, () => {
