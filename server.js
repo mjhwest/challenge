@@ -84,14 +84,23 @@ function getWeekDays(firstDate, secondDate) {
 app.get("/completeweeks", (req, res) => {
   const firstDate = new Date(req.body.firstDate);
   const secondDate = new Date(req.body.secondDate);
+  const units = req.body.units;
   const diffTime = Math.abs(secondDate - firstDate);
   const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
   //nyumber of total days / 7 to get number of complete weeks
   const completeweeks = Math.floor(diffDays / 7);
 
-  res.json(completeweeks);
-});
+if (req.body.units) {
+    // unit in seconds, need to multiple a week to day, hours, mins, seconds 
+    if(units == "seconds") {
+        const timeInSeconds = completeweeks *7 *24 *60 *60;
+        res.json(timeInSeconds)
+    }
+} else {
 
+  res.json(completeweeks);
+}
+});
 
 app.listen(PORT, () => {
   console.log(`App is ready to go at http://localhost:${PORT}`);
