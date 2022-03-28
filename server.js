@@ -11,8 +11,7 @@ app.use(bodyParser.json());
 // establish testing 'home' route
 app.get("/", (req, res) => res.send("Testing for challenge"));
 
-// 1. Find out the number of days between two datetime parameters.
-// 4. Accept a third parameter to convert the result of (1, 2 or 3) into one of seconds, minutes, hours, years.
+// 1. Find out the number of days between two datetime parameters & // 4. Accept a third parameter to convert the result of (1, 2 or 3) into one of seconds, minutes, hours, years.
 app.get("/daysbetween", (req, res) => {
   const firstDate = new Date(req.body.firstDate);
   const secondDate = new Date(req.body.secondDate);
@@ -52,15 +51,39 @@ app.get("/daysbetween", (req, res) => {
   }
 });
 
-// 2. Find out the number of weekdays between two datetime parameters.
-// 4. Accept a third parameter to convert the result of (1, 2 or 3) into one of seconds, minutes, hours, years.
+
+
+// 2. Find out the number of weekdays between two datetime parameters & // 4. Accept a third parameter to convert the result of (1, 2 or 3) into one of seconds, minutes, hours, years.
 app.get("/getweekdays", (req, res) => {
   const firstDate = new Date(req.body.firstDate);
   const secondDate = new Date(req.body.secondDate);
+  const units = req.body.units;
   const numberOfWeekDays = getWeekDays(firstDate, secondDate);
-  res.json(numberOfWeekDays);
-});
+  //   res.json(numberOfWeekDays);
+  if (req.body.units) {
+    if (units == "seconds") {
+      const timeInSeconds = numberOfWeekDays * 24 * 60 * 60 * 60;
+      res.json(timeInSeconds);
+    }
 
+    if (units == "minutes") {
+      const timeInMinutes = numberOfWeekDays * 24 * 60;
+      res.json(timeInMinutes);
+    }
+
+    if (units == "hours") {
+      const timeInHours = numberOfWeekDays * 24;
+      res.json(timeInHours);
+    }
+
+    if (units == "years") {
+      const timeInYears = numberOfWeekDays / 365;
+      res.json(timeInYears);
+    }
+  } else {
+    res.json(numberOfWeekDays);
+  }
+});
 //function to figure out the number of weekdays in any given date period.
 function getWeekDays(firstDate, secondDate) {
   let count = 0;
@@ -79,8 +102,7 @@ function getWeekDays(firstDate, secondDate) {
   return count;
 }
 
-// 3. Find out the number of complete weeks between two datetime parameters.
-// 4. Accept a third parameter to convert the result of (1, 2 or 3) into one of seconds, minutes, hours, years.
+// 3. Find out the number of complete weeks between two datetime parameters & // 4. Accept a third parameter to convert the result of (1, 2 or 3) into one of seconds, minutes, hours, years.
 app.get("/completeweeks", (req, res) => {
   const firstDate = new Date(req.body.firstDate);
   const secondDate = new Date(req.body.secondDate);
@@ -97,29 +119,27 @@ app.get("/completeweeks", (req, res) => {
       res.json(timeInSeconds);
     }
 
-    // units in mins, multiple by days, hours, mins. 
+    // units in mins, multiple by days, hours, mins.
     if (units == "minutes") {
-        const timeInMinutes = completeweeks *7 *24 *60;
-        res.json(timeInMinutes)
+      const timeInMinutes = completeweeks * 7 * 24 * 60;
+      res.json(timeInMinutes);
     }
 
-    //units in hours, multiply by days, hours. 
+    //units in hours, multiply by days, hours.
     if (units == "hours") {
-        const timeInHours = completeweeks *7 *24;
-        res.json(timeInHours)
+      const timeInHours = completeweeks * 7 * 24;
+      res.json(timeInHours);
     }
 
     //units in years, divide by weeks
     if (units == "years") {
-        const timeInYears = completeweeks / 52; 
-        res.json(timeInYears)
+      const timeInYears = completeweeks / 52;
+      res.json(timeInYears);
     }
   } else {
     res.json(completeweeks);
   }
 });
-
-
 
 app.listen(PORT, () => {
   console.log(`App is ready to go at http://localhost:${PORT}`);
