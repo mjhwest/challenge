@@ -97,14 +97,29 @@ app.get("/completeweeks", (req, res) => {
       res.json(timeInSeconds);
     }
 
+    // units in mins, multiple by days, hours, mins. 
     if (units == "minutes") {
         const timeInMinutes = completeweeks *7 *24 *60;
         res.json(timeInMinutes)
+    }
+
+    //units in hours, multiply by days, hours. 
+    if (units == "hours") {
+        const timeInHours = completeweeks *7 *24;
+        res.json(timeInHours)
+    }
+
+    //units in years, divide by weeks
+    if (units == "years") {
+        const timeInYears = completeweeks / 52; 
+        res.json(timeInYears)
     }
   } else {
     res.json(completeweeks);
   }
 });
+
+
 
 app.listen(PORT, () => {
   console.log(`App is ready to go at http://localhost:${PORT}`);
