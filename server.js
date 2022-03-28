@@ -90,16 +90,20 @@ app.get("/completeweeks", (req, res) => {
   //nyumber of total days / 7 to get number of complete weeks
   const completeweeks = Math.floor(diffDays / 7);
 
-if (req.body.units) {
-    // unit in seconds, need to multiple a week to day, hours, mins, seconds 
-    if(units == "seconds") {
-        const timeInSeconds = completeweeks *7 *24 *60 *60;
-        res.json(timeInSeconds)
+  if (req.body.units) {
+    // unit in seconds, need to multiple a week to day, hours, mins, seconds
+    if (units == "seconds") {
+      const timeInSeconds = completeweeks * 7 * 24 * 60 * 60;
+      res.json(timeInSeconds);
     }
-} else {
 
-  res.json(completeweeks);
-}
+    if (units == "minutes") {
+        const timeInMinutes = completeweeks *7 *24 *60;
+        res.json(timeInMinutes)
+    }
+  } else {
+    res.json(completeweeks);
+  }
 });
 
 app.listen(PORT, () => {
