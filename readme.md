@@ -107,6 +107,7 @@ For example: to figure out how many seconds are between between weekdays for two
 ![curl](assets/curl.png)
 
 Another example: How find out how many complete weeks are between two dates, replicate the following image then select enter. 
+
 ![curlweeks](assets/curlweeks.png)
 
 Lastly, to allow for the specification of a timezone for comparison of input parameters from different timezones, then select enter. 
